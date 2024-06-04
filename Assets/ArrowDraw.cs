@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -36,11 +37,11 @@ public class ArrowDraw : MonoBehaviour
                 = Quaternion.Euler(0, 0, angleRad * Mathf.Rad2Deg);
 
             arrowImage.rectTransform.sizeDelta = new Vector2(size, size);
-        }
+            arrowImage.gameObject.active = true;
+                }
         if (Input.GetMouseButtonUp(0))
         {
-
-
+            arrowImage.gameObject.active = false;
         }
 
     }

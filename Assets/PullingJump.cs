@@ -7,6 +7,8 @@ public class PullingJump : MonoBehaviour
     private Rigidbody rb;
     private float jumpPower = 10;
     private Vector3 clickPosition;
+    private bool isCanJump;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,7 +22,7 @@ public class PullingJump : MonoBehaviour
         {
             clickPosition = Input.mousePosition;
         }
-        if (Input.GetMouseButtonUp(0))
+        if (isCanJump && Input.GetMouseButtonUp(0))
         {
             Vector3 dist = clickPosition - Input.mousePosition;
 
@@ -29,6 +31,23 @@ public class PullingJump : MonoBehaviour
                 return;
             }
             rb.velocity = dist.normalized * jumpPower;
+            isCanJump = false;
         }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        isCanJump = true;
+        Debug.Log("è’ìÀÇµÇΩ");
+    }
+    private void OnCollisionStay(Collision collision)
+    {
+        Debug.Log("ê⁄êGíÜ");
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        //isCanJump = false;
+        Debug.Log("ó£íEÇµÇΩ");
     }
 }
